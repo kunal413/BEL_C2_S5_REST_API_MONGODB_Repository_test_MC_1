@@ -1,6 +1,7 @@
 package com.niit.jap.BEL_C2_S3_REST_API_MONGODB_MC_1.controller;
 
 import com.niit.jap.BEL_C2_S3_REST_API_MONGODB_MC_1.domain.Track;
+import com.niit.jap.BEL_C2_S3_REST_API_MONGODB_MC_1.exception.TrackAlreadyExitException;
 import com.niit.jap.BEL_C2_S3_REST_API_MONGODB_MC_1.exception.TrackNotFoundException;
 import com.niit.jap.BEL_C2_S3_REST_API_MONGODB_MC_1.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class TrackController {
         this.trackService = trackService;
     }
     @PostMapping("/track")
-    public ResponseEntity<?>insertTrack(@RequestBody Track track){
+    public ResponseEntity<?>insertTrack(@RequestBody Track track) throws TrackAlreadyExitException {
         Track track1 =trackService.saveTrack(track);
         return new ResponseEntity<>(track1, HttpStatus.CREATED);
     }
